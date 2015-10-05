@@ -51,8 +51,8 @@ Conceptually, the GPIO Protocol operations are:
 
 .. c:function:: int deactivate(u8 which);
 
-    Notifies the GPIO controller that a previously activated line has
-    been unassigned and can be deactivated.
+    Notifies the GPIO controller that a previously activated line 
+    has been unassigned and can be deactivated.
 
 .. c:function:: int get_direction(u8 which, u8 *direction);
 
@@ -178,8 +178,9 @@ Greybus GPIO Protocol Version Response
 The Greybus GPIO Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-gpio-protocol-version-response`.
-A Greybus GPIO controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0701.001>A Greybus GPIO controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0701.001>
 
 .. figtable::
     :nofig:
@@ -214,8 +215,8 @@ Table :num:`table-gpio-line-count-response` describes the Greybus GPIO
 line count response. The response contains a one-byte value defining
 the number of lines managed by the controller, minus one. That is, a
 count value of zero represents a single GPIO line, while a (maximal)
-count value of 255 represents 256 lines. GPIOs shall be numbered
-sequentially starting at zero.
+count value of 255 represents 256 lines. <GYBS.R.0702.001>GPIOs shall be 
+numbered sequentially starting at zero.</GYBS.R.0702.001>
 
 .. figtable::
     :nofig:
@@ -268,9 +269,9 @@ The Greybus GPIO activate response message has no payload.
 Greybus GPIO Deactivate Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus GPIO deactivate operation notifies the GPIO controller
+<GYBS.A.0701.001>The Greybus GPIO deactivate operation notifies the GPIO controller
 that a previously activated line is no longer in use and can be
-deactivated.
+deactivated.</GYBS.A.0701.001>
 
 Greybus GPIO Deactivate Request
 """""""""""""""""""""""""""""""
@@ -293,8 +294,8 @@ to be deactivated.
 
 ..
 
-Greybus Deactivate Response
-"""""""""""""""""""""""""""
+Greybus GPIO Deactivate Response
+""""""""""""""""""""""""""""""""
 
 The Greybus GPIO deactivate response message has no payload.
 
@@ -798,8 +799,9 @@ Greybus SPI Protocol Version Response
 The Greybus SPI Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-spi-protocol-version-response`.
-A Greybus SPI controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0703.001>A Greybus SPI controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0703.001>
 
 .. figtable::
     :nofig:
@@ -940,13 +942,17 @@ Greybus SPI Protocol Bits Per Word Mask Operation
 
 The Greybus SPI bits per word mask operation allows the requestor to
 determine the mask indicating which values of bits_per_word are
-supported by the SPI master. If set, transfer with unsupported
-bits_per_word should be rejected. If not set, this value is simply
-ignored, and it's up to the individual driver to perform any validation.
+supported by the SPI master. <GYBS.S.0701.001>If set, transfer with 
+unsupported bits_per_word should be rejected.</GYBS.S.0701.001> If not 
+set, this value is simply ignored, and it's up to the individual driver 
+to perform any validation.
 
+<GYBS.S.0702.001>
 Transfers should be rejected if following expression evaluates to zero:
 
         master->bits_per_word_mask & (1 << (tx_desc->bits_per_word - 1))
+
+</GYBS.S.0702.001>
 
 Greybus SPI Protocol Bits Per Word Mask Request
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -1015,11 +1021,12 @@ transaction. The operation consists of a set of one or more
 :ref:`gb_spi_transfer <gb_spi_transfer>` descriptors, which define data
 transfers to be performed by the SPI master. The transfer operation request
 includes data for each :ref:`gb_spi_transfer <gb_spi_transfer>` descriptor
-involving a write operation.  The data shall be sent immediately following the
+involving a write operation.  <GYBS.R.0704.001>The data shall be sent 
+immediately following the
 :ref:`gb_spi_transfer <gb_spi_transfer>` descriptors (with no intervening pad
 bytes).  The transfer operation response includes data for each
 :ref:`gb_spi_transfer <gb_spi_transfer>` descriptor involving a read operation,
-with all read data transferred contiguously.
+with all read data transferred contiguously.</GYBS.R.0704.001>
 
 Greybus SPI Transfer Request
 """"""""""""""""""""""""""""
@@ -1072,11 +1079,11 @@ transfer request.
     ==========     ==============  ======    ===============    ===========================
 
 Any data to be written follows the last :ref:`gb_spi_transfer <gb_spi_transfer>`
-descriptor. Data for the first write :ref:`gb_spi_transfer <gb_spi_transfer>`
+descriptor. <GYBS.R.0705.001>Data for the first write :ref:`gb_spi_transfer <gb_spi_transfer>`
 descriptor in the array immediately follows the last :ref:`gb_spi_transfer
 <gb_spi_transfer>` descriptor in the array, and no padding shall be inserted
 between data sent for distinct SPI :ref:`gb_spi_transfer <gb_spi_transfer>`
-descriptors.
+descriptors.</GYBS.R.0705.001>
 
 Greybus SPI Transfer Response
 """""""""""""""""""""""""""""
@@ -1124,8 +1131,9 @@ conceptually:
 
 .. c:function:: int send_data(u16 size, u8 *data);
 
-    Requests that the UART device begins transmitting characters. One
-    or more bytes to be transmitted shall be supplied by the sender.
+    Requests that the UART device begins transmitting characters. 
+    <GYBS.R.0706.001>One or more bytes to be transmitted shall be supplied 
+    by the sender.</GYBS.R.0706.001>
 
 .. c:function:: int receive_data(u16 size, u8 flags, u8 *data);
 
@@ -1222,8 +1230,9 @@ Greybus UART Protocol Version Response
 The Greybus UART Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-uart-protocol-version-response`.
-A Greybus UART controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0707.001>A Greybus UART controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0707.001>
 
 .. figtable::
     :nofig:
@@ -1244,8 +1253,9 @@ Greybus UART Send Data Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Greybus UART Send Data operation requests that the UART
-device begin transmission of characters.  One or more characters to be
-transmitted may optionally be provided with this request.
+device begin transmission of characters.  <GYBS.P.0701.001>One or more 
+characters to be transmitted may optionally be provided with this 
+request.</GYBS.P.0701.001>
 
 Greybus UART Send Data Request
 """"""""""""""""""""""""""""""
@@ -1317,9 +1327,10 @@ particular character.
 Greybus UART Receive Data Status Flags
 """"""""""""""""""""""""""""""""""""""
 
-Table :num:`table-uart-receive-data-request` defines the values supplied
-as flag values for the Greybus UART receive data request.
-Any combination of these values may be supplied in a single request.
+<GYBS.P.0702.001>Table :num:`table-uart-receive-data-request` defines 
+the values supplied as flag values for the Greybus UART receive data 
+request. Any combination of these values may be supplied in a single 
+request.</GYBS.P.0702.001>
 
 .. figtable::
     :nofig:
@@ -1454,10 +1465,10 @@ bit mask of modem status flags to set.
 Greybus UART Modem Status Flags
 """""""""""""""""""""""""""""""
 
-Table :num:`table-uart-modem-status-flags` defines the values supplied
-as flag values for the Greybus UART set control line state
-request. Any combination of these values may be supplied in a single
-request.
+<GYBS.P.0703.001>Table :num:`table-uart-modem-status-flags` defines 
+the values supplied as flag values for the Greybus UART set control 
+line state request. Any combination of these values may be supplied
+in a single request. </GYBS.P.0703.001>
 
 .. figtable::
     :nofig:
@@ -1491,8 +1502,9 @@ Greybus UART Break Control Request
 """"""""""""""""""""""""""""""""""
 
 Table :num:`table-uart-break-control-request` defines the Greybus UART
-break control request. The requestq supplies the duration of the break
-condition that should be generated by the UART device transmit line.
+break control request. <GYBS.S.0703.001>The requestq supplies the 
+duration of the break condition that should be generated by the UART 
+device transmit line.</GYBS.S.0703.001>
 
 .. figtable::
     :nofig:
@@ -1698,8 +1710,9 @@ Greybus PWM Protocol Version Response
 The Greybus PWM Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-pwm-protocol-version-response`.
-A Greybus PWM controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0708.001>A Greybus PWM controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0708.001>
 
 .. figtable::
     :nofig:
@@ -1788,9 +1801,9 @@ The Greybus PWM activate response message has no payload.
 Greybus PWM Deactivate Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus PWM instance deactivate operation notifies the PWM
-controller that a previously activated instance is no longer in use
-and can be deactivated.
+<GYBS.A.0702.001>The Greybus PWM instance deactivate operation notifies the PWM
+controller that a previously activated instance is no longer in use and can be 
+deactivated.</GYBS.A.0702.001>
 
 Greybus PWM Deactivate Request
 """"""""""""""""""""""""""""""
@@ -1863,8 +1876,8 @@ Greybus PWM Polarity Request
 
 Table :num:`table-pwm-polarity-request` defines the Greybus PWM
 polarity request. The request supplies the target instance number and
-polarity (normal or inverted). The polarity may not be configured when
-a PWM instance is enabled.
+polarity (normal or inverted). <GYBS.P.0704.001>The polarity may not 
+be configured when a PWM instance is enabled.</GYBS.P.0704.001>
 
 .. figtable::
     :nofig:
@@ -1978,13 +1991,13 @@ Conceptually, the five operations in the Greybus I2C Protocol are:
 
 .. c:function:: int set_timeout(u16 timeout_ms);
 
-   Sets the timeout (in milliseconds) the I2C adapter should allow
-   before giving up on an addressed client.
+   <GYBS.S.0704.001>Sets the timeout (in milliseconds) the I2C adapter 
+   should allow before giving up on an addressed client.</GYBS.S.0704.001>
 
 .. c:function:: int set_retries(u8 retries);
 
-   Sets the number of times an adapter should retry an I2C op before
-   giving up.
+   <GYBS.S.0705.001>Sets the number of times an adapter should retry 
+   an I2C op before giving up.</GYBS.S.0705.001>
 
 .. c:function:: int transfer(u8 op_count, struct i2c_op *ops);
 
@@ -2060,8 +2073,9 @@ Greybus I2C Protocol Version Response
 The Greybus I2C Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-i2c-protocol-version-response`.
-A Greybus I2C controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0709.001>A Greybus I2C controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0709.001>
 
 .. figtable::
     :nofig:
@@ -2167,9 +2181,9 @@ Greybus I2C Set Timeout Request
 
 Table :num:`table-i2c-set-timeout-request` defines the Greybus I2C set
 timeout request. The request contains a 16-bit value representing the
-timeout to be used by an I2C adapter, expressed in milliseconds. If
-the value supplied is zero, an I2C adapter-defined value shall be
-used.
+timeout to be used by an I2C adapter, expressed in milliseconds. 
+<GYBS.R.0710.001>If the value supplied is zero, an I2C adapter-defined 
+value shall be used.</GYBS.R.0710.001>
 
 .. figtable::
     :nofig:
@@ -2311,10 +2325,10 @@ transfer request.
     ...          ...             ...      Data     Data for last write op on the transfer
     ===========  ==============  =======  ======   ===================================
 
-Any data to be written follows the last op descriptor.  Data for
-the first write op in the array immediately follows the last op in
-the array, and no padding shall be inserted between data sent for
-distinct I2C ops.
+Any data to be written follows the last op descriptor.  <GYBS.R.0711.001>Data 
+for the first write op in the array immediately follows the last op in the 
+array, and no padding shall be inserted between data sent for distinct 
+I2C ops.</GYBS.R.0711.001>
 
 Greybus I2C Transfer Response
 """""""""""""""""""""""""""""
@@ -2455,9 +2469,9 @@ Greybus SDIO Protocol Version Response
 
 The Greybus SDIO Protocol version response payload contains two
 one-byte values, as defined in table
-:num:`table-sdio-protocol-version-response`.  A Greybus SDIO
-controller adhering to the Protocol specified herein shall report
-major version |gb-major|, minor version |gb-minor|.
+:num:`table-sdio-protocol-version-response`.  <GYBS.R.0712.001>A Greybus 
+SDIO controller adhering to the Protocol specified herein shall report
+major version |gb-major|, minor version |gb-minor|.</GYBS.R.0712.001>
 
 .. figtable::
     :nofig:
@@ -2562,8 +2576,9 @@ Greybus SDIO Set Ios Request
 """"""""""""""""""""""""""""
 
 Table :num:`table-sdio-setios-request` defines the Greybus SDIO Set
-Ios request. The request shall pass a descriptor which contains a set
-of parameters for configuring the SDIO controller.
+Ios request. <GYBS.R.0713.001>The request shall pass a descriptor which 
+contains a set of parameters for configuring the SDIO 
+controller.</GYBS.R.0713.001>
 
 .. figtable::
     :nofig:
@@ -2646,8 +2661,8 @@ masks for the Greybus SDIO controllers.
 Greybus SDIO Protocol Bus Mode
 """"""""""""""""""""""""""""""
 
-Table :num:`table-sdio-bus-mode` defines the Mode in which the Bus
-should be set for operation.
+<GYBS.S.0706.001>Table :num:`table-sdio-bus-mode` defines the Mode in which 
+the Bus should be set for operation.</GYBS.S.0706.001>
 
 .. figtable::
     :nofig:
@@ -2663,15 +2678,13 @@ should be set for operation.
     |_|                              (All other values reserved)                             0x02..0xff
     ===============================  ======================================================  ========================
 
-..
-
 .. _sdio-power-mode:
 
 Greybus SDIO Protocol Power Mode
 """"""""""""""""""""""""""""""""
 
-Table :num:`table-sdio-power-mode` defines the power supply mode in
-which the slot should be set.
+<GYBS.S.0707.001>Table :num:`table-sdio-power-mode` defines the power supply mode in
+which the slot should be set.</GYBS.S.0707.001>
 
 .. figtable::
     :nofig:
@@ -2688,7 +2701,6 @@ which the slot should be set.
     GB_SDIO_POWER_UNDEFINED          SDIO power undefined                                    0x03
     |_|                              (All other values reserved)                             0x04..0xff
     ===============================  ======================================================  ========================
-
 ..
 
 .. _sdio-bus-width:
@@ -2696,8 +2708,8 @@ which the slot should be set.
 Greybus SDIO Protocol Bus Width
 """""""""""""""""""""""""""""""
 
-Table :num:`table-sdio-bus-width` defines the values in which the data
-bus width can be set.
+<GYBS.A.0703.001>Table :num:`table-sdio-bus-width` defines the values in which the data
+bus width can be set.</GYBS.A.0703.001>
 
 .. figtable::
     :nofig:
@@ -2779,8 +2791,8 @@ values allowed to be set for the bus.
 Greybus SDIO Protocol Driver Type
 """""""""""""""""""""""""""""""""
 
-Table :num:`table-sdio-driver-type` defines the driver strength types
-in which the Controller shall be configured.
+<GYBS.R.0714.001>Table :num:`table-sdio-driver-type` defines the driver strength types
+in which the Controller shall be configured.</GYBS.R.0714.001>
 
 .. figtable::
     :nofig:
@@ -2841,8 +2853,8 @@ Command request.
 
 Greybus SDIO Protocol Command Flags
 """""""""""""""""""""""""""""""""""
-Table :num:`table-sdio-cmd-flags` defines the flags that can be passed
-to a command.
+<GYBS.A.0704.001>Table :num:`table-sdio-cmd-flags` defines the flags that can be passed
+to a command.</GYBS.A.0704.001>
 
 .. figtable::
     :nofig:
@@ -2912,9 +2924,9 @@ Command response.
 Greybus SDIO Transfer Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus SDIO Transfer operation allows the requester to send
-or receive data blocks and shall be preceded by a Greybus Command
-Request for data transfer command as specified by SD Association.
+<GYBS.R.0715.001>The Greybus SDIO Transfer operation allows the requester to 
+send or receive data blocks and shall be preceded by a Greybus Command Request 
+for data transfer command as specified by SD Association.</GYBS.R.0715.001>
 
 Greybus SDIO Transfer Request
 """""""""""""""""""""""""""""
@@ -3021,10 +3033,11 @@ the sending controller.
 Greybus SDIO Event Bit Masks
 """"""""""""""""""""""""""""
 
-Table :num:`table-sdio-event-bit-mask` defines the bit masks which
-specify the set of events that a controller can trigger related to SD
-card. If card have the GB_SDIO_CAP_NONREMOVABLE capability, the
-card detection events shall be ignored.
+<GYBS.A.0705.001>Table :num:`table-sdio-event-bit-mask` defines the bit masks which
+specify the set of events that a controller can trigger related to 
+SD card.</GYBS.A.0705.001> <GYBS.R.0716.001>If card have the 
+GB_SDIO_CAP_NONREMOVABLE capability, the card detection events shall be 
+ignored.</GYBS.R.0716.001>
 
 .. figtable::
     :nofig:

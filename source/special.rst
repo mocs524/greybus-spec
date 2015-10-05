@@ -6,9 +6,10 @@ Special Protocols
 This section defines three Protocols, each of which serves a special
 purpose in a Greybus system.
 
-The first is the Control Protocol.  Every Interface shall provide a
-CPort that uses the Control Protocol. It is used by the AP Module to
-notify Interfaces when connections are available for them to use.
+The first is the Control Protocol.  <GYBS.R.0201.001>Every Interface 
+shall provide a CPort that uses the Control Protocol.</GYBS.R.0201.001> 
+It is used by the AP Module to notify Interfaces when connections are 
+available for them to use.
 
 The second is the SVC Protocol, which is used only between the SVC
 and AP Module.  The SVC provides low-level control of the |unipro|
@@ -19,28 +20,30 @@ notify the AP Module of events, such as the insertion or removal of
 a Module.
 
 The third is the Firmware Protocol, which is used between the AP Module and any
-other module's bootloader to download firmware executables to the module.  When
-a module's manifest includes a CPort using the Firmware Protocol, the AP can
-connect to that CPort and download a firmware executable to the module.
+other module's bootloader to download firmware executables to the module.  
+<GYBS.A.0201.001>When a module's manifest includes a CPort using the 
+Firmware Protocol, the AP can connect to that CPort and download a firmware 
+executable to the module.</GYBS.A.0201.001>
 
 .. _control-protocol:
 
 Control Protocol
 ----------------
 
-All Interfaces are required to define a CPort that uses the Control
-Protocol, and shall be prepared to receive Operation requests on that
-CPort at any time. The CPort that uses the Control Protocol must have an
-id of '0'. CPort id '0' is a reserved CPort address for the Control
-Protocol. Similarly the bundle descriptor associated with the Control
-CPort must have an id of '0'. Bundle id '0' is a reserved id for the
-Control Protocol bundle descriptor.
+<GYBS.R.0202.001>All Interfaces are required to define a CPort that uses 
+the Control Protocol, and shall be prepared to receive Operation requests 
+on that CPort at any time.</GYBS.R.0202.001> The CPort that uses the 
+Control Protocol must have an id of '0'. CPort id '0' is a reserved CPort 
+address for the Control Protocol. Similarly the bundle descriptor 
+associated with the Control CPort must have an id of '0'. Bundle id '0' 
+is a reserved id for the Control Protocol bundle descriptor.
 
 A Greybus connection is established whenever a control connection is used,
-but the Interface is never notified that such a connection exists. Only
-the AP Module is able to send control requests.  Any other Interface
-shall only send control response messages, and such messages shall
-only be sent in reply to a request received on its control CPort.
+but the Interface is never notified that such a connection exists. 
+<GYBS.R.0203.001>Only the AP Module is able to send control requests. Any 
+other Interface shall only send control response messages, and such 
+messages shall only be sent in reply to a request received on its 
+control CPort.</GYBS.R.0203.001>
 
 Conceptually, the Operations in the Greybus Control Protocol are:
 
@@ -74,17 +77,18 @@ Conceptually, the Operations in the Greybus Control Protocol are:
 
     This Operation is used to notify an Interface that a Greybus
     connection has been established using the indicated CPort.
-    Upon receiving this request, an Interface shall be prepared to
-    receive messages on the indicated CPort.  The Interface may send
-    messages over the indicated CPort once it has sent a response
-    to the connected request.  This operation is never used for
-    control CPort.
+    <GYBS.R.0204.001>Upon receiving this request, an Interface
+    shall be prepared to receive messages on the indicated 
+    CPort.</GYBS.R.0204.001>  <GYBS.P.0201.001>The Interface may send 
+    messages over the indicated CPort once it has sent a response to
+    the connected request.</GYBS.P.0201.001>  This operation is never 
+    used for control CPort.
 
 .. c:function:: int disconnected(u16 cport_id);
 
-    This Operation is used to notify an Interface that a previously
-    established Greybus connection may no longer be used.  This
-    operation is never used for control CPort.
+    This Operation is used to notify an Interface that a previously 
+    established Greybus connection may no longer be used. This operation
+    is never used for control CPort.
 
 Greybus Control Operations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -154,8 +158,9 @@ Greybus Control Protocol Version Response
 The Greybus Control Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-control-protocol-version-response`.
-A Greybus Control controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0205.001>A Greybus Control controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0205.001>
 
 .. figtable::
     :nofig:
@@ -279,11 +284,12 @@ The Greybus control connected response message contains no payload.
 Greybus Control Disconnected Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus control disconnected Operation is sent to notify an
-Interface that a CPort (other than control CPort) that was formerly
-the subject of a Greybus Control Connected Operation shall no longer
-be used.  No more messages may be sent over this connection, and any
-messages received shall be discarded.
+<GYBS.R.0206.001>The Greybus control disconnected Operation is sent to 
+notify an Interface that a CPort (other than control CPort) that was 
+formerly the subject of a Greybus Control Connected Operation shall no 
+longer be used.</GYBS.R.0206.001>  <GYBS.R.0207.001>No more messages may 
+be sent over this connection, and any messages received shall be 
+discarded.</GYBS.R.0207.001>
 
 Greybus Control Disconnected Request
 """"""""""""""""""""""""""""""""""""
@@ -463,7 +469,7 @@ power-on.
 Greybus SVC Protocol Version Request
 """"""""""""""""""""""""""""""""""""
 
-Table :num:`table-svc-version-request` defines the Greybus SVC
+Table :num:`table-svc-version-request` defines the Greybus SVC 
 Protocol version request payload. The request supplies the greatest
 major and minor version of the SVC Protocol supported by the SVC.
 
@@ -485,11 +491,10 @@ major and minor version of the SVC Protocol supported by the SVC.
 Greybus SVC Protocol Version Response
 """""""""""""""""""""""""""""""""""""
 
-The Greybus SVC Protocol version response payload contains two
-one-byte values, as defined in table
-:num:`table-svc-protocol-version-response`. A Greybus SVC
-controller adhering to the Protocol specified herein shall report
-major version |gb-major|, minor version |gb-minor|.
+The Greybus SVC Protocol version response payload contains two one-byte values, 
+as defined in table :num:`table-svc-protocol-version-response`. 
+<GYBS.R.0208.001>A Greybus SVC controller adhering to the Protocol specified 
+herein shall report major version |gb-major|, minor version |gb-minor|.</GYBS.R.0208.001>
 
 .. figtable::
     :nofig:
@@ -549,9 +554,9 @@ to direct the SVC to perform a |unipro| DME Peer Get on an Interface.
 
 Greybus DME Peer Get Request
 """"""""""""""""""""""""""""
-This can be used by the AP to query specific attributes located in
-the |unipro| stack of an Interface. The SVC returns the value of the
-DME attribute requested.
+<GYBS.A.0202.001>This can be used by the AP to query specific attributes 
+located in the |unipro| stack of an Interface.</GYBS.A.0202.001> The SVC 
+returns the value of the DME attribute requested.
 
 .. figtable::
     :nofig:
@@ -599,8 +604,8 @@ to direct the SVC to perform a |unipro| DME_PEER_SET on an Interface.
 
 Greybus DME Peer Set Request
 """"""""""""""""""""""""""""
-This can be used by the AP to set specific attributes located in
-the |unipro| stack of an Interface.
+<GYBS.A.0203.001>This can be used by the AP to set specific attributes located 
+in the |unipro| stack of an Interface.</GYBS.A.0203.001>
 
 .. figtable::
     :nofig:
@@ -712,22 +717,23 @@ Greybus SVC Interface Device ID Operation
 
 The Greybus SVC Interface Device ID Operation is used by the AP
 Module to request the SVC associate a device id with an Interface.
-The device id is used by the |unipro| switch to determine how
-packets should be routed through the network.  The AP Module is
-responsible for managing the mapping between Interfaces and UniPro
-device ids.  Note that the SVC always uses device ID 0, and the AP
-Module always uses device ID 1.
+<GYBS.S.0201.001>The device id is used by the |unipro| switch to 
+determine how packets should be routed through the 
+network.</GYBS.S.0201.001>  The AP Module is responsible for managing 
+the mapping between Interfaces and UniPro device ids.  Note that the 
+SVC always uses device ID 0, and the AP Module always uses device ID 1.
 
 Greybus SVC Interface Device ID Request
 """""""""""""""""""""""""""""""""""""""
 
 The Greybus SVC Interface device ID request is sent only by the AP
-Module to the SVC.  It supplies the device ID that the SVC should
-associate with the indicated Interface.  The AP Module can remove
-the association of an Interface with a device ID by assigning device
-ID value 0.  It is an error to assign a (non-zero) device ID to an
-Interface that already has one, or to clear the device ID of an
-Interface that has no device ID assigned.
+Module to the SVC.  <GYBS.S.0202.001>It supplies the device ID that 
+the SVC should associate with the indicated Interface.</GYBS.S.0202.001>  
+<GYBS.A.0204.001>The AP Module can remove the association of an 
+Interface with a device ID by assigning device ID value 0.</GYBS.A.0204.001>  
+It is an error to assign a (non-zero) device ID to an Interface that 
+already has one, or to clear the device ID of an Interface that has no 
+device ID assigned.
 
 Note that assigning a device ID to an Interface does not cause
 the SVC to set up any routes for that device ID.  Routes are
@@ -774,9 +780,9 @@ The Greybus SVC hotplug request is sent only by the SVC to the AP
 Module.  The Interface ID informs the AP Module which Interface now
 has a module present, and supplies information (such
 as the vendor and model numbers) the SVC knows about the Interface.
-Exactly one hotplug event shall be sent by the SVC for a module when
-it has been inserted (or if it was found to be present at initial
-power-on).
+<GYBS.R.0209.001>Exactly one hotplug event shall be sent by the SVC 
+for a module when it has been inserted (or if it was found to be 
+present at initial power-on).</GYBS.R.0209.001>
 
 .. figtable::
     :nofig:
@@ -817,9 +823,9 @@ Greybus SVC Interface Hot Unplug Request
 
 The Greybus SVC hot unplog request is sent only by the SVC to the AP
 Module.  The Interface ID informs the AP which Interface no longer
-has a module attached to it.  The SVC shall ensure the hotplug event
-for the Interface has been successfully delivered to the AP Module
-before sending a hot unplug.
+has a module attached to it.  <GYBS.R.0210.001>The SVC shall ensure 
+the hotplug event for the Interface has been successfully delivered 
+to the AP Module before sending a hot unplug.</GYBS.R.0210.001>
 
 .. figtable::
     :nofig:
@@ -890,8 +896,8 @@ Module to the SVC.  The first Interface ID and first CPort ID define
 one end of the connection to be established, and the second
 Interface ID and CPort ID define the other end.
 
-CPort flags can be specified as a bitwise-or of flags in *flags*,
-and are defined in table :num:`table-svc-connection-create-request-flags`.
+<GYBS.A.0205.001>CPort flags can be specified as a bitwise-or of flags 
+in *flags*, and are defined in table :num:`table-svc-connection-create-request-flags`.</GYBS.A.0205.001>
 When set, the corresponding feature is enabled. For example,
 specifying CSD enables |unipro| Controlled Segment Dropping.
 
@@ -940,9 +946,10 @@ Greybus SVC Connection Destroy Operation
 
 The AP Module sends this to the SVC to request that a connection
 that was previously set up by a Connection Create Operation be
-torn down.  The AP Module shall have sent Disconnected Control
-Operations to the two Interfaces prior to this call.  It is an error
-to attempt to destroy a connection more than once.
+torn down.  <GYBS.R.0211.001>The AP Module shall have sent 
+Disconnected Control Operations to the two Interfaces prior to this 
+call.</GYBS.R.0211.001>  It is an error to attempt to destroy a 
+connection more than once.
 
 Greybus SVC Connection Destroy Request
 """"""""""""""""""""""""""""""""""""""
@@ -988,10 +995,11 @@ The operations in the Greybus Firmware Protocol are:
 
     Negotiates the major and minor version of the Protocol used for
     communication over the connection.  The AP sends the request offering the
-    version of the Protocol it supports.  The module responds with the version
-    that shall be used--either the one offered if supported, or its own lower
-    version.  Protocol handling code adhering to the Protocol specified here
-    supports major version |gb-major|, minor version |gb-minor|.
+    version of the Protocol it supports.  <GYBS.R.0212.001>The module responds 
+    with the version that shall be used--either the one offered if supported, 
+    or its own lower version.</GYBS.R.0212.001>  Protocol handling code 
+    adhering to the Protocol specified here supports major 
+    version |gb-major|, minor version |gb-minor|.
 
 .. c:function:: int firmware_size(u8 stage, u32 *size);
 
@@ -1079,8 +1087,9 @@ Greybus Firmware Protocol Version Response
 """"""""""""""""""""""""""""""""""""""""""
 
 Table :num:`table-firmware-version-response` defines the Greybus firmware
-version response payload.  A Greybus module implementing the Protocol described
-herein shall report major version |gb-major|, minor version |gb-minor|.
+version response payload.  <GYBS.R.0213.001>A Greybus module implementing 
+the Protocol described herein shall report major version |gb-major|, 
+minor version |gb-minor|.</GYBS.R.0213.001>
 
 .. figtable::
     :nofig:
@@ -1100,12 +1109,13 @@ herein shall report major version |gb-major|, minor version |gb-minor|.
 Greybus Firmware Firmware Size Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus Firmware firmware size operation allows the requestor to submit a
-boot stage to the AP, so that the AP can associate a firmware blob with that
-boot stage and respond with its size.  The AP keeps the firmware blob associated
-with the boot stage until it receives another Firmware Size Request on the same
-connection, but is not required to send identical firmware blobs in response to
-different requests with identical boot stages, even to the same module.
+<GYBS.A.0206.001>The Greybus Firmware firmware size operation allows the 
+requestor to submit a boot stage to the AP, so that the AP can associate a 
+firmware blob with that boot stage and respond with its size.</GYBS.A.0206.001>  
+The AP keeps the firmware blob associated with the boot stage until it receives 
+another Firmware Size Request on the same connection, but is not required to 
+send identical firmware blobs in response to different requests with identical 
+boot stages, even to the same module.
 
 .. _firmware-size-request:
 
@@ -1135,8 +1145,8 @@ the Protocol.
 Greybus Firmware Boot Stages
 """"""""""""""""""""""""""""
 
-Table :num:`table-firmware-boot-stages` defines the boot stages whose firmware
-can be requested from the AP via the Protocol.
+<GYBS.A.0207.001>Table :num:`table-firmware-boot-stages` defines the boot stages 
+whose firmware can be requested from the AP via the Protocol.</GYBS.A.0207.001>
 
 .. figtable::
     :nofig:
@@ -1194,11 +1204,12 @@ Greybus Firmware Get Firmware Request
 
 Table :num:`table-firmware-get-firmware-request` defines the Greybus Firmware
 get firmware request payload.  The request specifies an offset into the firmware
-blob, and the size of the stream of bytes requested.  The stream size requested
-must be less than or equal to the size given by the most recent firmware size
-response (:ref:`firmware-size-response`) minus the offset; when it is not, the
-AP shall signal an error in its response.  The module is responsible for
-tracking its offset into the firmware blob as needed.
+blob, and the size of the stream of bytes requested.  <GYBS.R.0214.001>The 
+stream size requested must be less than or equal to the size given by the 
+most recent firmware size response (:ref:`firmware-size-response`) minus 
+the offset; when it is not, the AP shall signal an error in its 
+response.</GYBS.R.0214.001>  The module is responsible for tracking its 
+offset into the firmware blob as needed.
 
 .. figtable::
     :nofig:
@@ -1220,10 +1231,10 @@ Greybus Firmware Get Firmware Response
 
 Table :num:`table-firmware-get-firmware-response` defines the Greybus Firmware
 get firmware response payload.  The response includes the stream of bytes
-requested by the module.  In the case that the AP cannot fulfill the request,
-such as when the requested stream size was greater than the total size of the
-firmware blob, it shall signal an error in the status byte of the response
-header.
+requested by the module.  <GYBS.R.0215.001>In the case that the AP cannot 
+fulfill the request, such as when the requested stream size was greater 
+than the total size of the firmware blob, it shall signal an error in the 
+status byte of the response header.</GYBS.R.0215.001>
 
 .. figtable::
     :nofig:
@@ -1245,12 +1256,13 @@ Greybus Firmware Ready to Boot Operation
 The Greybus Firmware ready to boot operation lets the requesting module notify
 the AP that it has successfully loaded the connection's currently-associated
 firmware blob and is able to hand over control of the processor to that blob,
-indicating the status of its firmware blob.  The AP shall then send a response
-empty of payload, indicating via the header's status byte whether or not it
-permits the module to continue booting.
+indicating the status of its firmware blob.  <GYBS.R.0216.001>The AP shall 
+then send a response empty of payload, indicating via the header's status byte 
+whether or not it permits the module to continue booting.</GYBS.R.0216.001>
 
-The module shall send a ready to boot request only when it has successfully
-loaded a firmware blob and can execute that firmware.
+<GYBS.R.0217.001>The module shall send a ready to boot request only when 
+it has successfully loaded a firmware blob and can execute that 
+firmware.</GYBS.R.0217.001>
 
 Greybus Firmware Ready to Boot Request
 """"""""""""""""""""""""""""""""""""""
@@ -1278,9 +1290,9 @@ firmware blob.
 Greybus Firmware Ready to Boot Firmware Blob Status
 """""""""""""""""""""""""""""""""""""""""""""""""""
 
-Table :num:`table-firmware-blob-status` defines the constants by which the
+<GYBS.A.0208.001>Table :num:`table-firmware-blob-status` defines the constants by which the
 module can indicate the status of its firmware blob to the AP in a Greybus
-Firmware Ready to Boot Request.
+Firmware Ready to Boot Request.</GYBS.A.0208.001>
 
 .. figtable::
     :nofig:
@@ -1302,7 +1314,8 @@ Firmware Ready to Boot Request.
 Greybus Firmware Ready to Boot Response
 """""""""""""""""""""""""""""""""""""""
 
-If the AP permits the module to boot in its current status, the Greybus Firmware
-Ready to Boot response message shall have no payload.  In the case that the AP
-forbids the module from booting, it shall signal an error in the status byte of
-the response message's header.
+<GYBS.R.0218.001>If the AP permits the module to boot in its current status, 
+the Greybus Firmware Ready to Boot response message shall have no 
+payload.</GYBS.R.0218.001>  <GYBS.R.0219.001>In the case that the AP
+forbids the module from booting, it shall signal an error in the status byte 
+of the response message's header.</GYBS.R.0219.001>

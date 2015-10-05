@@ -47,10 +47,10 @@ The operations in the Greybus vibrator Protocol are:
 Greybus Vibrator Message Types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table :num:`table-vibrator-operation-type` describes the Greybus
-vibrator operation types and their values. A message type consists of an
-operation type combined with a flag (0x80) indicating whether the
-operation is a request or a response.
+Table :num:`table-vibrator-operation-type` describes the Greybus vibrator 
+operation types and their values. A message type consists of an operation type 
+combined with a flag (0x80) indicating whether the operation is a request or a 
+response.
 
 .. figtable::
     :nofig:
@@ -105,8 +105,8 @@ Greybus Vibrator Protocol Version Response
 The Greybus vibrator Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-vibrator-protocol-version-response`.
-A Greybus vibrator controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0301.001>A Greybus vibrator controller adhering to the Protocol specified herein
+shall report major version |gb-major|, minor version |gb-minor|.</GYBS.R.0301.001>
 
 .. figtable::
     :nofig:
@@ -132,9 +132,9 @@ vibrator be enabled for the specified number of milliseconds.
 Greybus Vibrator On Request
 """""""""""""""""""""""""""
 
-Table :num:`table-vibrator-on-request` defines the Greybus Vibrator
-On request.  The request supplies the amount of time that the
-vibrator should now be enabled for.
+Table :num:`table-vibrator-on-request` defines the Greybus Vibrator On request.  
+<GYBS.S.0301.001>The request supplies the amount of time that the vibrator 
+should now be enabled for.</GYBS.S.0301.001>
 
 .. figtable::
     :nofig:
@@ -301,8 +301,8 @@ Greybus Battery Protocol Version Response
 The Greybus battery Protocol version response payload contains two
 one-byte values, as defined in table
 :num:`table-battery-protocol-version-response`.
-A Greybus battery controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+<GYBS.R.0302.001>A Greybus battery controller adhering to the Protocol specified herein
+shall report major version |gb-major|, minor version |gb-minor|.</GYBS.R.0302.001>
 
 .. figtable::
     :nofig:
@@ -701,10 +701,10 @@ output to humans.  Typical examples of HID class devices include:
 
 The Greybus HID Protocol uses *descriptors* and *reports* to
 interact with a HID device.  A HID Descriptor defines all
-capabilities of a HID device.   Before exchanging data with
-a HID device, the AP Module can configure a HID device based on
-these capabilities by sending Feature Reports.  Data exchange
-between the AP Module and a HID device are implemented by
+capabilities of a HID device.   <GYBS.A.0301.001>Before exchanging data 
+with a HID device, the AP Module can configure a HID device based on
+these capabilities by sending Feature Reports.</GYBS.A.0301.001>  
+Data exchange between the AP Module and a HID device are implemented by
 sending Input or Output Reports.
 
 This document focuses on how the HID protocol is implemented over
@@ -743,16 +743,18 @@ Reports are well defined by [HID01]_, and the the same will be followed here.
 
 HID Input Report
 """"""""""""""""
-The input reports are generated on the device and are sent from device to host.
-This can be requested synchronously or asynchronously.
+<GYBS.A.0302.001>The input reports are generated on the device and are sent 
+from device to host.  This can be requested synchronously or 
+asynchronously.</GYBS.A.0302.001>
 
 In the asynchronous case, when the device has active data it wishes to report to
 the host, it will generate an data request towards the host. When the host
 receives the receive request, it is responsible for reading the data from the
 receive request.
 
-In the synchronous case, the host can generate a get-report request to HID
-device, in response to which the device must respond with data.
+<GYBS.A.0303.001>In the synchronous case, the host can generate a get-report 
+request to HID device, in response to which the device must respond with 
+data.</GYBS.A.0303.001>
 
 HID Output Report
 """""""""""""""""
@@ -762,9 +764,9 @@ device, it must generate a set-report request.
 
 HID Feature Report
 """"""""""""""""""
-The feature report is a bidirectional report and can be exchanged between the
-host and the device. They are normally used by the host to program the device
-into different configurations.
+<GYBS.A.0304.001>The feature report is a bidirectional report and can be 
+exchanged between the host and the device.</GYBS.A.0304.001> They are normally 
+used by the host to program the device into different configurations.
 
 For the host to get/set a feature-report on the device, it must use the
 get-report and set-report requests described later.
@@ -878,9 +880,9 @@ Greybus HID Protocol Version Response
 """""""""""""""""""""""""""""""""""""
 
 The Greybus HID Protocol version response payload contains two 1-byte values, as
-defined in table :num:`table-hid-protocol-version-response`. A Greybus HID
+defined in table :num:`table-hid-protocol-version-response`. <GYBS.R.0303.001>A Greybus HID
 controller adhering to the Protocol specified herein shall report major version
-|gb-major|, minor version |gb-minor|.
+|gb-major|, minor version |gb-minor|.</GYBS.R.0303.001>
 
 .. figtable::
     :nofig:
@@ -991,12 +993,12 @@ Greybus HID Get Report Operation
 The Greybus HID get report operation allows the host to fetch feature or input
 report synchronously from a HID device.
 
-The get-report command is a mandatory request (if the device contains Input or
-Feature reports) that the host can issue to the device at any time after
-initialization to get a singular report from the device. The device is
-responsible for responding with the last known input or feature for the report
-id. If the value has not been set for that report yet, the device must return 0
-for the length of report item.
+<GYBS.A.0305.001>The get-report command is a mandatory request (if the device 
+contains Input or Feature reports) that the host can issue to the device at 
+any time after initialization to get a singular report from the 
+device. </GYBS.A.0305.001>The device is responsible for responding with the 
+last known input or feature for the report id. If the value has not been set 
+for that report yet, the device must return 0 for the length of report item.
 
 Get-report is often used by applications on startup to retrieve the “current
 state” of the device rather than waiting for the device to generate the next
@@ -1059,8 +1061,9 @@ Greybus HID Set Report Operation
 The Greybus HID set report operation allows the host to send feature or output
 report synchronously to a HID device.
 
-The set-report command is a specific request that the host may issue to the
-device at any time after initialization to set a singular report on the device.
+<GYBS.P.0301.001>The set-report command is a specific request that the host may
+issue to the device at any time after initialization to set a singular report 
+on the device.</GYBS.P.0301.001>
 The device is responsible for accepting the value provided in the operation and
 updating its state.
 
@@ -1153,20 +1156,19 @@ The operations in the Greybus Lights Protocol are:
 .. c:function:: int get_channel_config(u8 light_id, u8 channel_id, u8 *channel_count, struct gb_channel_config *config);
 
    Request a set of configuration parameters related to a channel in a
-   light controller. The return structure elements shall map the fields
-   of :ref:`lights-get-channel-config-response`.
+   light controller. <GYBS.R.0304.001>The return structure elements shall map the fields
+   of :ref:`lights-get-channel-config-response`.</GYBS.R.0304.001>
 
 .. c:function:: int get_channel_flash_config(u8 light_id, u8 channel_id, struct gb_channel_flash_config *flash_config);
 
    Request a set of flash configuration parameters related to a
-   channel in a light controller. The return structure elements shall
-   map the fields of :ref:`lights-get-channel-flash-config-response`
+   channel in a light controller. <GYBS.R.0305.001>The return structure elements shall
+   map the fields of :ref:`lights-get-channel-flash-config-response`</GYBS.R.0305.001>
 
 .. c:function:: int set_blink(u8 light_id, u8 channel_id, u16 time_on_ms, u16 time_off_ms);
 
-   Set hardware blink if supported by the device, the time values are
-   specified in milliseconds. Setting time values to 0 shall disable
-   blink.
+   Set hardware blink if supported by the device, the time values are specified
+   in milliseconds. Setting time values to 0 shall disable blink.
 
 .. c:function:: int set_brightness(u8 light_id, u8 channel_id, u8 brightness);
 
@@ -1268,9 +1270,9 @@ Greybus Lights Protocol Version Response
 """"""""""""""""""""""""""""""""""""""""
 
 The Greybus Lights Protocol version response payload contains two 1-byte values,
-as defined in table :num:`table-lights-protocol-version-response`. A Greybus
+as defined in table :num:`table-lights-protocol-version-response`. <GYBS.R.0306.001>A Greybus
 Lights controller adhering to the Protocol specified herein shall report major
-version |gb-major|, minor version |gb-minor|.
+version |gb-major|, minor version |gb-minor|.</GYBS.R.0306.001>
 
 .. figtable::
     :nofig:
@@ -1290,10 +1292,10 @@ version |gb-major|, minor version |gb-minor|.
 Greybus Lights Get Lights Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus Lights Get Lights operation allows the requester to
-determine the actual number of Lights Controllers existing in the
-Module. If this operation fail, no further operations related to
-Greybus Lights shall occur.
+The Greybus Lights Get Lights operation allows the requester to determine the 
+actual number of Lights Controllers existing in the Module. <GYBS.R.0307.001>If 
+this operation fail, no further operations related to Greybus Lights shall 
+occur.</GYBS.R.0307.001>
 
 Greybus Lights Get Lights Request
 """""""""""""""""""""""""""""""""
@@ -1306,9 +1308,10 @@ Greybus Lights Get Lights Response
 Table :num:`table-lights-get-lights-response` describes the Greybus
 Lights Get Lights response. The response payload contains a one-byte
 value defining the number of lights controllers in the Module.
-If the value returned is 0 no further operations related to
-Greybus Lights shall follow. Lights Controllers shall be numbered
-sequentially starting at zero and ending in lights_count less one.
+<GYBS.R.0308.001>If the value returned is 0 no further operations related to
+Greybus Lights shall follow.</GYBS.R.0308.001> <GYBS.R.0309.001>Lights Controllers 
+shall be numbered sequentially starting at zero and ending in lights_count 
+less one.</GYBS.R.0309.001>
 
 .. figtable::
     :nofig:
@@ -1327,11 +1330,11 @@ sequentially starting at zero and ending in lights_count less one.
 Greybus Lights Get Light Config Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus Lights Get Light Config operation allows the requester to
-collect a set of configuration parameters from a specific light
-controller. If this operation fail, all Module lights controllers
-configuration that already had occurred should be teared down and no
-further operations related to Greybus Lights shall follow.
+<GYBS.R.0310.001>The Greybus Lights Get Light Config operation allows the 
+requester to collect a set of configuration parameters from a specific light
+controller. If this operation fail, all Module lights controllers 
+configuration that already had occurred should be teared down and no further 
+operations related to Greybus Lights shall follow.</GYBS.R.0310.001>
 
 Greybus Lights Get Light Config Request
 """""""""""""""""""""""""""""""""""""""
@@ -1382,11 +1385,11 @@ Controller.
 Greybus Lights Get Channel Config Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus Lights Get Channel Config operation allows the requester
-to collect a set of configuration parameters from a specific Channel
-of a Light Controller. If this operation fail, all Module lights
-Controllers configuration that already had occurred should be teared
-down and no further operations related to Greybus Lights shall follow.
+<GYBS.R.0311.001>The Greybus Lights Get Channel Config operation allows the 
+requester to collect a set of configuration parameters from a specific Channel
+of a Light Controller. If this operation fail, all Module lights Controllers 
+configuration that already had occurred should be teared down and no further 
+operations related to Greybus Lights shall follow.</GYBS.R.0311.001>
 
 Greybus Lights Get Channel Config Request
 """""""""""""""""""""""""""""""""""""""""
@@ -1504,12 +1507,12 @@ associated to a Channel. Only the listed values are valid.
 Greybus Lights Get Channel Flash Config Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Greybus Lights Get Channel Flash Config operation allows the
-requester to collect a set of configuration parameters related to
-flash type modes from a specific Channel of a Light Controller. If
-this operation fail, all Module lights Controllers configuration that
-already had occurred should be teared down and no further operations
-related to Greybus Lights shall follow.
+<GYBS.R.0312.001>The Greybus Lights Get Channel Flash Config operation allows 
+the requester to collect a set of configuration parameters related to flash 
+type modes from a specific Channel of a Light Controller. If this operation 
+fail, all Module lights Controllers configuration that already had occurred 
+should be teared down and no further operations related to Greybus Lights 
+shall follow.</GYBS.R.0312.001>
 
 Greybus Lights Get Channel Flash Config Request
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -1603,8 +1606,9 @@ Greybus Lights Set Blink Operation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Greybus Lights Set Blink operation allows the requester to enable
-the blink mode of a specific Channel. Setting time_on and time_off to
-0 or setting brightness  level to a fixed value shall disable blink.
+the blink mode of a specific Channel. <GYBS.R.0313.001>Setting time_on 
+and time_off to 0 or setting brightness level to a fixed value shall 
+disable blink.</GYBS.R.0313.001>
 
 Greybus Lights Set Blink Request
 """"""""""""""""""""""""""""""""
@@ -1717,8 +1721,8 @@ Greybus Lights Event Operation
 The Greybus Lights Event operation signals to the recipient that a
 change in the device setup have occurred.
 
-This event shall be discarded by the recipient until a valid light
-controller configuration is known.
+<GYBS.R.0314.001>This event shall be discarded by the recipient 
+until a valid light controller configuration is known.</GYBS.R.0314.001>
 
 This operation is unidirectional and does not have a correspondent
 response.
@@ -1780,9 +1784,10 @@ Greybus Lights Set Flash Intensity Request
 
 The Greybus Lights Set Flash Intensity request payload contains two
 1-byte values that represent the light_id and channel_id, and 4-byte
-value that represents the current intensity in microamperes. The value
-shall be set between the minimum and maximum values got from flash
-configuration operation.
+value that represents the current intensity in microamperes. 
+<GYBS.R.0315.001>The value shall be set between the minimum and 
+maximum values got from flash configuration operation.</GYBS.R.0315.001>
+See table 
 :num:`table-lights-set-flash-intensity-request`.
 
 .. figtable::
@@ -1817,8 +1822,9 @@ Greybus Lights Set Flash Strobe Request
 
 The Greybus Lights Set Flash Strobe request payload contains three
 1-byte values that represents light_id, channel_id and the strobe
-state to be set. If state is 0 means disable, 1 means enable. Any
-other value shall be considered invalid.
+state to be set. <GYBS.R.0316.001>If state is 0 means disable, 1 
+means enable. Any other value shall be considered invalid.</GYBS.R.0316.001>
+See table 
 :num:`table-lights-set-flash-strobe-request`.
 
 .. figtable::
@@ -1853,10 +1859,9 @@ Greybus Lights Set Flash Timeout Request
 
 The Greybus Lights Set Flash Timeout request payload contains two
 1-byte values that represent the light_id and channel_id, and 4-byte
-value that represents the flash timeout in microseconds. The value
-shall be set between the minimum and maximum values got from flash
-configuration operation.
-:num:`table-lights-set-flash-timeout-request`.
+value that represents the flash timeout in microseconds. <GYBS.R.0317.001>The 
+value shall be set between the minimum and maximum values got from flash
+configuration operation.</GYBS.R.0317.001> See table :num:`table-lights-set-flash-timeout-request`.
 
 .. figtable::
     :nofig:
@@ -2060,11 +2065,11 @@ minor version of the loopback Protocol supported by the sender.
 Greybus Loopback Protocol Version Response
 """"""""""""""""""""""""""""""""""""""""""
 
-The Greybus loopback Protocol version response payload contains two
-one-byte values, as defined in table
-:num:`table-loopback-protocol-version-response`.
-A Greybus loopback controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+The Greybus loopback Protocol version response payload contains two one-byte 
+values, as defined in table :num:`table-loopback-protocol-version-response`.
+<GYBS.R.0318.001>A Greybus loopback controller adhering to the Protocol 
+specified herein shall report major version |gb-major|, minor 
+version |gb-minor|.</GYBS.R.0318.001>
 
 .. figtable::
     :nofig:
@@ -2250,11 +2255,11 @@ minor version of the Raw Protocol supported by the requester.
 Greybus Raw Protocol Version Response
 """""""""""""""""""""""""""""""""""""
 
-The Greybus Raw Protocol version response payload contains two
-one-byte values, as defined in table
-:num:`table-raw-protocol-version-response`.
-A Greybus Raw controller adhering to the Protocol specified herein
-shall report major version |gb-major|, minor version |gb-minor|.
+The Greybus Raw Protocol version response payload contains two one-byte values, 
+as defined in table :num:`table-raw-protocol-version-response`.
+<GYBS.R.0319.001>A Greybus Raw controller adhering to the Protocol specified 
+herein shall report major version |gb-major|, minor version 
+|gb-minor|.</GYBS.R.0319.001>
 
 .. figtable::
     :nofig:
